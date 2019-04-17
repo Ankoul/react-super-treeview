@@ -11,14 +11,14 @@
     "dist"
   ],
   "scripts": {
-    "clean:dist": "rm -rf dist",
+    "clean:dist": "DEL /F/Q/S dist > NUL & if exist dist RMDIR /Q/S dist",
     "clean:examples": "rm -rf examples",
     "dev:watch": "./node_modules/webpack/bin/webpack.js --watch",
-    "test": "./node_modules/mocha-webpack/bin/mocha-webpack --webpack-config webpack.test.js \"src/**/*.test.js\"",
+    "test": "node ./node_modules/mocha-webpack/bin/mocha-webpack --webpack-config webpack.test.js \"src/**/*.test.js\"",
     "test:watch": "./node_modules/mocha-webpack/bin/mocha-webpack -w --webpack-config webpack.test.js \"src/**/*.test.js\"",
     "examples": "npm run clean:examples && npm run build && ./node_modules/webpack/bin/webpack.js --config webpack.examples.js",
     "examples:watch": "./node_modules/webpack/bin/webpack.js --config webpack.examples.js --watch",
-    "build": "npm run clean:dist && npm test && ./node_modules/webpack/bin/webpack.js",
+    "build": "npm run clean:dist && npm test && node ./node_modules/webpack/bin/webpack.js",
     "preversion": "npm run build",
     "prepublishOnly": "npm run build"
   },
